@@ -50,6 +50,7 @@ function addMessage({ nickname, message }) {
   liElement.textContent = `${nickname}: ${message}`;
 
   messagesElement.appendChild(liElement);
+  messagesElement.scrollTo(0, messagesElement.scrollHeight);
 }
 
 function startGame() {
@@ -57,8 +58,8 @@ function startGame() {
   const chat = document.getElementById("chat");
 
   document.getElementById("init").style.display = "none";
-  board.style.display = "block";
-  chat.style.display = "block";
+  board.style.display = "inline-block";
+  chat.style.display = "inline-block";
 
   board.addEventListener("click", onClick);
   chat.addEventListener("submit", onChatMessage);
