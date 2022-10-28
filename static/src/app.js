@@ -97,6 +97,12 @@ function onClick(e) {
 function place(data) {
   document.getElementById(data.id).textContent = data.symbol;
   hasCombination();
+  let isDraw = [...document.querySelectorAll(".cell")].every(
+    (el) => el.textContent != ""
+  );
+  if (isDraw) {
+    endGame();
+  }
   // setTimeout(hasCombination, 0);
 }
 
@@ -114,7 +120,12 @@ function hasCombination() {
 }
 
 function endGame(winner) {
-  const choice = confirm(`Player ${winner} wins!\nDo you want a rematch?`);
+  let choice;
+  if (!winner) {
+    choice = confirm("Draw!\nDo you want to try again?");
+  } else {
+    choice = confirm(`Player ${winner} wins!\nDo you want a rematch?`);
+  }
 
   if (choice) {
     socket.emit("newGame");
